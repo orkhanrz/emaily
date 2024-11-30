@@ -1,20 +1,25 @@
 require("dotenv/config");
 require("./src/services/passport");
-const keys = require('./src/config/keys')
-const mongoose = require('mongoose');
+const keys = require("./src/config/keys");
+const mongoose = require("mongoose");
 const cookieSession = require("cookie-session");
-const passport = require('passport');
+const passport = require("passport");
 const express = require("express");
 const PORT = process.env.PORT || 8000;
 
-mongoose.connect(keys.mongoURI, { dbName: keys.mongoNAME });
+mongoose
+	.connect(keys.mongoURI, { dbName: keys.mongoNAME })
+	.then(() => console.log("db connected"))
+	.catch((err) => console.log(err));
 
 const app = express();
 
-app.use(cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000,
-    keys: [keys.cookieKey]
-}))
+app.use(
+	cookieSession({
+		maxAge: 30 * 24 * 60 * 60 * 1000,
+		keys: [keys.cookieKey],
+	})
+);
 app.use(passport.initialize());
 app.use(passport.session());
 

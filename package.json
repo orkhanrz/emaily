@@ -3,7 +3,7 @@
     "start": "node index",
     "server": "nodemon index",
     "client": "npm run start --prefix client",
-    "dev": "concurrently 'npm run server' 'npm run client'"
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "concurrently": "^9.1.0",

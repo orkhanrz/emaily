@@ -1,11 +1,23 @@
-import Header from "./components/Header/Header";
+import { useEffect } from "react";
+import Header from "./components/Header";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { fetchUser } from "./actions";
 
 function App() {
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   return (
-    <div>
+    <div className="container">
       <Header />
-      <h1>Hello world!</h1>
-      <a href="/auth/google">Login with Google</a>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<h1>Home Page</h1>} />
+          <Route path="/surveys" element={<h1>Dashboard</h1>} />
+          <Route path="/surveys/new" element={<h1>New survey</h1>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
